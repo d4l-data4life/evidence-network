@@ -1,0 +1,93 @@
+{
+  "datasets": {
+    "title": "Conjuntos de datos",
+    "subtitle": "Bases de datos OMOP publicadas en la red.",
+    "empty": "Aún no hay conjuntos de datos visibles. Registra un sitio y añade uno en <area>Sitios y conjuntos de datos</area>.",
+    "releaseCount": "{count, plural, one {# release} other {# releases}}",
+
+    "addRelease": "Añadir release",
+    "makePrivate": "Hacer privado",
+    "makeVisible": "Hacer visible",
+    "pubPublished": "Publicado: visible para todos los usuarios autenticados.",
+    "pubSubmitted": "Enviado: a la espera de revisión del coordinador.",
+    "pubApproved": "Aprobado. Establece la visibilidad en «Autenticado» para hacerlo visible.",
+    "pubNotPublished": "No publicado. Envíalo para la aprobación del coordinador para publicarlo.",
+    "submitForPublication": "Enviar para publicación",
+    "withdraw": "Retirar",
+    "rejected": "Rechazado: {note}",
+
+    "releasesHeading": "Releases (cortes de datos OMOP)",
+    "releasesHelp": "Cada release es un corte de datos del OMOP CDM (un release publicado es inmutable). Los envíos de resultados de Achilles y DQD (niveles D2/D3) se adjuntarán por release más adelante.",
+    "noReleases": "Aún no hay releases.",
+    "noReleasesHint": "Añade el primer corte de datos con «Añadir release».",
+    "releaseMeta": "CDM {cdm} · vocab {vocab} · corte de origen {date}",
+
+    "metadataVersionsHeading": "Versiones de metadatos",
+    "publishVersion": "Publicar versión {n}",
+    "unpublishedChanges": "Los metadatos del catálogo tienen cambios sin publicar desde la v{n}.",
+    "noVersionsDraft": "Los metadatos de este conjunto de datos aún no tienen versiones publicadas: el contenido actual es un borrador de trabajo.",
+    "noMetadataVersions": "Aún no hay versiones de metadatos publicadas.",
+    "readonlySnapshotInline": "instantánea de solo lectura",
+
+    "currentDataset": "Conjunto de datos actual",
+    "versionBadge": "Versión {n}",
+    "readonlySnapshotBadge": "Instantánea de solo lectura",
+    "frozen": "Congelado el {date}.",
+    "frozenBy": "Congelado el {date} por {name}.",
+    "immutableSuffix": "Inmutable: las ediciones se aplican al conjunto de datos actual, no a las versiones publicadas.",
+    "noteLabel": "Nota:",
+
+    "editTitle": "Editar conjunto de datos",
+    "editSubtitle": "Edita los metadatos del catálogo (copia de trabajo). Publica una versión para congelar una instantánea inmutable. (Los cortes de datos se gestionan como releases.)",
+    "errorMissing": "Indica al menos un nombre y un tipo de fuente.",
+    "saveChanges": "Guardar cambios",
+
+    "addTitle": "Añadir conjunto de datos",
+    "addSubtitle": "Una base de datos OMOP alojada por {site}.",
+    "addDataset": "Añadir conjunto de datos",
+
+    "addReleaseTitle": "Añadir release del conjunto de datos",
+    "addReleaseSubtitle": "Un nuevo corte de datos del OMOP CDM para {name}. Los campos se corresponden con la tabla CDM_SOURCE de OMOP. Un release publicado es inmutable: añade uno nuevo para una actualización.",
+    "errorReleaseLabel": "Indica al menos una etiqueta de release.",
+
+    "releaseForm": {
+      "label": "Etiqueta del release",
+      "labelHint": "p. ej. 2024-Q1 (única por conjunto de datos).",
+      "cdmSourceName": "Nombre de la fuente CDM",
+      "cdmSourceNameHint": "CDM_SOURCE.cdm_source_name",
+      "cdmSourceAbbreviation": "Abreviatura de la fuente CDM",
+      "cdmHolder": "Titular del CDM",
+      "cdmVersion": "Versión del CDM",
+      "vocabularyVersion": "Versión del vocabulario",
+      "vocabularyVersionHint": "p. ej. v5.0 31-AUG-23",
+      "sourceReleaseDate": "Fecha del release de origen",
+      "sourceReleaseDateHint": "Fecha del corte de datos subyacente.",
+      "cdmReleaseDate": "Fecha del release del CDM",
+      "cdmReleaseDateHint": "Fecha en que se produjo esta compilación del CDM.",
+      "etlReference": "Referencia del ETL",
+      "etlReferenceHint": "CDM_SOURCE.cdm_etl_reference (enlace/documento).",
+      "sourceDescription": "Descripción de la fuente",
+      "status": "Estado"
+    },
+
+    "fields": {
+      "name": "Nombre",
+      "namePlaceholder": "p. ej. base de atención primaria IPCI",
+      "abbreviation": "Abreviatura",
+      "abbreviationPlaceholder": "p. ej. IPCI",
+      "sourceType": "Tipo de fuente",
+      "careSetting": "Ámbito asistencial",
+      "careSettingHint": "Selecciona todos los que correspondan.",
+      "therapeuticAreas": "Áreas terapéuticas",
+      "therapeuticAreasHint": "Separadas por comas.",
+      "therapeuticAreasPlaceholder": "p. ej. cardiología, oncología",
+      "sourceCodingSystems": "Sistemas de codificación de origen",
+      "sourceCodingSystemsHint": "Separados por comas (vocabularios pre-ETL).",
+      "sourceCodingSystemsPlaceholder": "p. ej. ICD-10, SNOMED",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Sobre la base de datos",
+      "visibility": "Visibilidad",
+      "visibilityHint": "«Autenticado» = visible para cualquier usuario conectado (nunca anónimo)."
+    }
+  }
+}

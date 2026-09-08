@@ -1,0 +1,72 @@
+{
+  "studies": {
+    "title": "Estudos",
+    "subtitle": "Propostas e desenhos de estudos da rede no marketplace.",
+    "new": "Novo estudo",
+    "empty": "Ainda não há estudos. Crie o primeiro com “Novo estudo”.",
+    "unknownOwner": "Proprietário desconhecido",
+    "editTitle": "Editar estudo",
+    "editSubtitle": "As alterações atualizam a cópia de trabalho. Publique uma versão para congelar um snapshot imutável.",
+    "newSubtitle": "Catalogue um estudo. O desenho executável (coortes/análises) é vinculado externamente por enquanto.",
+    "errorMissing": "Informe pelo menos um título e um tipo de estudo.",
+    "saveChanges": "Salvar alterações",
+    "createStudy": "Criar estudo",
+    "currentStudy": "Estudo atual",
+    "scope": "Escopo",
+    "conditions": "Condições",
+    "keywords": "Palavras-chave",
+    "objective": "Objetivo",
+    "designReference": "Referência de desenho",
+    "designRefEmpty": "— (anexe um repositório Strategus/GitHub)",
+    "submitForPublication": "Enviar para publicação",
+    "withdraw": "Retirar",
+    "rejected": "Rejeitado: {note}",
+    "publishVersion": "Publicar versão {n}",
+    "version": "Versão {n}",
+    "unpublishedSince": "O estudo atual tem alterações não publicadas desde a v{n}.",
+    "noVersionsDraft": "Este estudo ainda não tem versões publicadas — o conteúdo atual é um rascunho de trabalho.",
+    "noVersions": "Ainda não há versões publicadas.",
+    "snapshotNote": "snapshot somente leitura",
+    "snapshotBadge": "Snapshot somente leitura",
+    "frozenByOn": "Congelado em {date} por {name}.",
+    "frozenOn": "Congelado em {date}.",
+    "snapshotImmutable": "Este snapshot é imutável — as edições se aplicam ao estudo atual, não às versões publicadas.",
+    "note": "Nota",
+    "pub": {
+      "published": "Publicado — visível para todos os usuários autenticados.",
+      "submitted": "Enviado — aguardando revisão do coordenador.",
+      "approved": "Aprovado. Defina a visibilidade como “Autenticado” (via Editar) para torná-lo visível.",
+      "notPublished": "Não publicado. Envie para aprovação do coordenador para publicar."
+    },
+    "role": {
+      "LEAD": "Líder",
+      "COORDINATOR": "Coordenador",
+      "DESIGNER": "Desenhista",
+      "STATISTICIAN": "Estatístico",
+      "COLLABORATOR": "Colaborador"
+    },
+    "field": {
+      "title": "Título",
+      "acronym": "Sigla",
+      "studyType": "Tipo de estudo",
+      "designType": "Tipo de desenho",
+      "status": "Status",
+      "visibility": "Visibilidade"
+    },
+    "hint": {
+      "scope": "Selecione todos que se aplicam.",
+      "conditions": "Separados por vírgula (termos MedDRA depois).",
+      "keywords": "Separadas por vírgula.",
+      "designRef": "Link para o repositório Strategus/GitHub do estudo (Fase A).",
+      "visibility": "“Autenticado” = visível para qualquer usuário conectado (nunca anônimo)."
+    },
+    "ph": {
+      "title": "ex. Segurança comparativa de inibidores de DPP-4",
+      "acronym": "Nome curto opcional",
+      "description": "Do que trata o estudo",
+      "objective": "Objetivo primário",
+      "conditions": "ex. diabetes tipo 2, insuficiência cardíaca",
+      "keywords": "ex. segurança, efetividade comparativa"
+    }
+  }
+}

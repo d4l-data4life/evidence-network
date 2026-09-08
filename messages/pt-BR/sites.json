@@ -1,0 +1,60 @@
+{
+  "sites": {
+    "title": "Sites e conjuntos de dados",
+    "subtitle": "Cadastre sua organização como parceira de dados e registre seus conjuntos de dados OMOP.",
+    "enrollSite": "Cadastrar site",
+    "errorForbidden": "Você não tem permissão para gerenciar esse site.",
+    "empty": "Você ainda não cadastrou um site. Comece por “Cadastrar site”.",
+    "datasetCount": "{count, plural, one {# conjunto de dados} other {# conjuntos de dados}}",
+
+    "addDataset": "Adicionar conjunto de dados",
+    "datasetsHeading": "Conjuntos de dados",
+    "noDatasetsManage": "Ainda não há conjuntos de dados. Adicione um em “Adicionar conjunto de dados”.",
+    "noDatasetsVisible": "Nenhum conjunto de dados visível para este site.",
+    "releaseCount": "{count, plural, one {# release} other {# releases}}",
+
+    "publishVersion": "Publicar versão {n}",
+    "unpublishedChanges": "O site atual tem alterações não publicadas desde a v{n}.",
+    "noVersionsDraft": "Este site ainda não tem versões publicadas — o conteúdo atual é um rascunho de trabalho.",
+    "noVersions": "Ainda não há versões publicadas.",
+    "readonlySnapshotInline": "snapshot somente leitura",
+    "manageHint": "Você gerencia este site. <link>Ver todos os conjuntos de dados visíveis →</link>",
+
+    "editTitle": "Editar site",
+    "editSubtitle": "As alterações atualizam a cópia de trabalho. Publique uma versão para congelar um snapshot imutável.",
+    "errorMissing": "Informe a razão social, o país e o tipo de organização.",
+    "saveChanges": "Salvar alterações",
+
+    "enrollTitle": "Cadastrar site",
+    "enrollSubtitle": "Registre sua organização como parceira de dados (a custodiante que detém os dados).",
+    "enrollSubmit": "Cadastrar site",
+
+    "currentSite": "Site atual",
+    "versionBadge": "Versão {n}",
+    "readonlySnapshotBadge": "Snapshot somente leitura",
+    "frozen": "Congelado em {date}.",
+    "frozenBy": "Congelado em {date} por {name}.",
+    "immutableSuffix": "Imutável — edições se aplicam ao site atual, não às versões publicadas.",
+    "noteLabel": "Nota:",
+    "website": "Site",
+    "governanceAccess": "Governança / acesso",
+
+    "fields": {
+      "legalName": "Razão social",
+      "legalNamePlaceholder": "ex.: University Medical Center Utrecht",
+      "abbreviation": "Sigla",
+      "abbreviationPlaceholder": "ex.: UMCU",
+      "country": "País",
+      "countryHint": "Código ISO do país ou nome.",
+      "countryPlaceholder": "ex.: NL",
+      "orgType": "Tipo de organização",
+      "description": "Descrição",
+      "descriptionPlaceholder": "Sobre a parceira de dados",
+      "website": "Site",
+      "websitePlaceholder": "https://…",
+      "governanceContact": "Contato de governança / acesso",
+      "governanceContactHint": "Como pesquisadores solicitam acesso aos dados.",
+      "governancePlaceholder": "Política de governança ou contato"
+    }
+  }
+}

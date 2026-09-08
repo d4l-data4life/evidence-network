@@ -1,0 +1,9 @@
+{
+  "adminUsers": {
+    "title": "Usuários",
+    "subtitle": "Promova ou rebaixe usuários. Coordenadores podem aprovar envios; superusuários também podem gerenciar usuários e a identidade visual.",
+    "errorSelf": "Você não pode remover seu próprio papel de superusuário (para evitar se bloquear).",
+    "you": "(você)",
+    "note": "Observação: a mudança de papel entra em vigor na próxima requisição do usuário (a autorização é reverificada no banco de dados a cada vez)."
+  }
+}

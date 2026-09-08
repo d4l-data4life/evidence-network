@@ -1,0 +1,9 @@
+{
+  "adminUsers": {
+    "title": "Users",
+    "subtitle": "Promote or demote users. Coordinators can approve submissions; superusers can also manage users and branding.",
+    "errorSelf": "You can’t remove your own superuser role (to avoid locking yourself out).",
+    "you": "(you)",
+    "note": "Note: a role change takes effect on the user’s next request (authorization is re-checked from the database each time)."
+  }
+}

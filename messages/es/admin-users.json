@@ -1,0 +1,9 @@
+{
+  "adminUsers": {
+    "title": "Usuarios",
+    "subtitle": "Asciende o desciende usuarios. Los coordinadores pueden aprobar envíos; los superusuarios también pueden gestionar usuarios y la identidad visual.",
+    "errorSelf": "No puedes quitarte tu propio rol de superusuario (para no bloquearte el acceso).",
+    "you": "(tú)",
+    "note": "Nota: el cambio de rol surte efecto en la próxima solicitud del usuario (la autorización se vuelve a comprobar en la base de datos cada vez)."
+  }
+}

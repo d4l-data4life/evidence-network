@@ -1,0 +1,571 @@
+// Prisma schema for the Evidence Network hello-world app.
+// Docs: https://pris.ly/d/prisma-schema
+//
+// Prisma 7 uses the Rust-free `prisma-client` generator: the client is emitted
+// as ESM/TS into app/generated/prisma and driven at runtime by the `pg` driver
+// adapter (see lib/prisma.ts). No query-engine binary ships in the image, so
+// there are no `binaryTargets` / musl / OpenSSL concerns in Docker.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ── Auth.js (NextAuth v5) models ─────────────────────────────────────────────
+// User/Account/Session/VerificationToken follow the shape expected by
+// @auth/prisma-adapter. Local login adds `username` + `passwordHash`; federated
+// ORCID login adds `orcidId` (the ORCID iD, e.g. 0000-0002-1825-0097).
+
+// System-wide privilege level (distinct from per-study StudyRole / per-site
+// SiteRole membership roles). USER = create sites/datasets/studies; COORDINATOR
+// = also review/approve submissions; SUPERUSER = also admin (branding + manage
+// users' system roles).
+enum SystemRole {
+  USER
+  COORDINATOR
+  SUPERUSER
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+
+  // Local username/password login
+  username     String? @unique
+  passwordHash String?
+
+  // Federated ORCID login (the ORCID iD from the OIDC `sub` claim)
+  orcidId String? @unique
+
+  systemRole SystemRole @default(USER)
+
+  // Preferred UI language (BCP-47, e.g. "en", "pt-BR", "es"). Null = follow the
+  // deployment's default locale (Setting.defaultLocale). Changeable at /account.
+  locale String?
+
+  // Preferred color theme: "light" | "dark" | "system" (null = system). Stored
+  // per-user so it does not leak across accounts on a shared browser.
+  theme String?
+
+  accounts Account[]
+  sessions Session[]
+
+  // Ownership / membership
+  ownedStudies     Study[]           @relation("StudyOwner")
+  studyMemberships StudyMembership[]
+  ownedSites       Site[]            @relation("SiteOwner")
+  siteMemberships  SiteMembership[]
+  matchRuns        MatchRun[]
+  studyVersions    StudyVersion[]    @relation("StudyVersionAuthor")
+  siteVersions     SiteVersion[]     @relation("SiteVersionAuthor")
+  datasetVersions  DatasetVersion[]  @relation("DatasetVersionAuthor")
+  reviewedStudies  Study[]           @relation("StudyReviewer")
+  reviewedDatasets Dataset[]         @relation("DatasetReviewer")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Coordinator approval workflow, at the record level (not per version), kept
+// separate from `visibility`. A study/dataset is shown to other authenticated
+// users only when visibility = AUTHENTICATED AND approvalStatus = APPROVED.
+enum ApprovalStatus {
+  DRAFT // not submitted
+  PENDING // submitted, awaiting review
+  APPROVED
+  REJECTED
+}
+
+// Singleton branding/config, editable by superusers.
+model Setting {
+  id           String   @id @default(cuid())
+  appName      String   @default("Evidence Network")
+  tagline      String?
+  landingIntro String? // paragraph under the headline on the public landing page
+  logoHeight   Int      @default(48) // landing-page logo height, in pixels
+  accentColor  String   @default("#A6CE39")
+  logo         Bytes?
+  logoMimeType String?
+
+  // Internationalization. `defaultLocale` is the fallback UI language for users
+  // who have not chosen one (User.locale = null) and for anonymous pages;
+  // `enabledLocales` is the set offered in the language switcher. Seeded from the
+  // active deployment profile (see lib/deployment); editable by a superuser.
+  defaultLocale  String   @default("en")
+  enabledLocales String[] @default(["en", "pt-BR", "es"])
+
+  updatedAt    DateTime @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  // BigInt (not Int): ORCID issues ~20-year tokens, so this Unix-timestamp
+  // expiry exceeds the year-2038 limit of a 32-bit Int and overflows.
+  expires_at        BigInt?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ── Marketplace: Studies (Phase A — catalog + team) ──────────────────────────
+// See docs/study-data-model.md. Phase A is catalog-first: the executable design
+// (cohorts/analyses) is referenced externally via `designRef` for now; the
+// structured design (Layer C) and execution (Layer D) attach later.
+
+enum Visibility {
+  PRIVATE // only owner + members
+  AUTHENTICATED // any signed-in marketplace user ("public" = authenticated-only, never anonymous)
+}
+
+enum StudyType {
+  CHARACTERIZATION
+  POPULATION_LEVEL_ESTIMATION
+  PATIENT_LEVEL_PREDICTION
+}
+
+enum StudyDesignType {
+  COHORT
+  CASE_CONTROL
+  CASE_ONLY
+  CROSS_SECTIONAL
+  SELF_CONTROLLED
+  OTHER
+}
+
+enum StudyScope {
+  SAFETY
+  EFFECTIVENESS
+  DRUG_UTILISATION
+  DISEASE_EPIDEMIOLOGY
+  METHOD_DEVELOPMENT
+  OTHER
+}
+
+enum StudyStatus {
+  DRAFT
+  PROPOSED
+  RECRUITING
+  DESIGN_FINALIZED
+  EXECUTING
+  RESULTS_AVAILABLE
+  COMPLETE
+  SUSPENDED
+}
+
+enum StudyRole {
+  LEAD
+  COORDINATOR
+  DESIGNER
+  STATISTICIAN
+  COLLABORATOR
+}
+
+model Study {
+  id          String  @id @default(cuid())
+  slug        String  @unique
+  title       String
+  acronym     String?
+  description String?
+  rationale   String?
+  objective   String?
+
+  studyType  StudyType
+  designType StudyDesignType?
+  scope      StudyScope[]
+  conditions String[] // free text / coded terms (MedDRA later)
+  keywords   String[]
+
+  status     StudyStatus @default(DRAFT)
+  visibility Visibility  @default(PRIVATE)
+
+  // Coordinator approval (separate from visibility).
+  approvalStatus ApprovalStatus @default(DRAFT)
+  reviewNote     String?
+  submittedAt    DateTime?
+  reviewedAt     DateTime?
+  reviewedById   String?
+
+  // Phase A: external link to the executable design (Strategus/GitHub repo).
+  // Replaced by structured StudyDesign entities in a later phase.
+  designRef String?
+
+  ownerId    String
+  owner      User              @relation("StudyOwner", fields: [ownerId], references: [id])
+  reviewedBy User?             @relation("StudyReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+  members    StudyMembership[]
+  matches    Match[]
+  versions   StudyVersion[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([visibility])
+  @@index([ownerId])
+}
+
+// Immutable, numbered snapshot of a Study's versioned content. Created by the
+// "Publish version" action; NEVER updated or deleted by the app (referenceable,
+// read-only history). The mutable working copy lives on `Study` (the head).
+model StudyVersion {
+  id            String @id @default(cuid())
+  studyId       String
+  versionNumber Int
+
+  // frozen copy of the study's versioned fields at publish time
+  title       String
+  acronym     String?
+  description String?
+  rationale   String?
+  objective   String?
+  studyType   StudyType
+  designType  StudyDesignType?
+  scope       StudyScope[]
+  conditions  String[]
+  keywords    String[]
+  status      StudyStatus
+  designRef   String?
+
+  note        String? // changelog / what changed in this version
+  createdById String?
+  createdAt   DateTime @default(now())
+
+  study     Study @relation(fields: [studyId], references: [id], onDelete: Cascade)
+  createdBy User? @relation("StudyVersionAuthor", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@unique([studyId, versionNumber])
+  @@index([studyId])
+}
+
+model StudyMembership {
+  id      String    @id @default(cuid())
+  studyId String
+  userId  String
+  role    StudyRole
+  isOwner Boolean   @default(false)
+
+  study Study @relation(fields: [studyId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([studyId, userId])
+}
+
+// ── Marketplace: Datasets (Phase D1 — site enrollment + versioned catalog) ────
+// See docs/dataset-data-model.md. Site → Dataset → DatasetVersion. The Achilles
+// and DQD enrichment tiers (D2/D3) attach to DatasetVersion later.
+
+enum SiteOrgType {
+  ACADEMIC
+  HOSPITAL
+  REGISTRY_HOLDER
+  GOVERNMENT
+  INDUSTRY
+  NON_PROFIT
+  OTHER
+}
+
+enum SiteRole {
+  OWNER
+  ADMIN
+  CONTRIBUTOR
+}
+
+enum DatasetSourceType {
+  EHR
+  CLAIMS
+  HOSPITAL
+  REGISTRY
+  OTHER
+}
+
+enum DatasetCareSetting {
+  PRIMARY_CARE
+  INPATIENT
+  OUTPATIENT
+  EMERGENCY
+  OTHER
+}
+
+enum CdmVersion {
+  V5_3
+  V5_4
+}
+
+enum DatasetReleaseStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model Site {
+  id               String      @id @default(cuid())
+  slug             String      @unique
+  legalName        String
+  abbreviation     String?
+  country          String // ISO 3166 code (free text for now)
+  orgType          SiteOrgType
+  description      String?
+  website          String?
+  governancePolicy String?
+
+  ownerId  String
+  owner    User             @relation("SiteOwner", fields: [ownerId], references: [id])
+  members  SiteMembership[]
+  datasets Dataset[]
+  versions SiteVersion[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([ownerId])
+}
+
+// Immutable, numbered snapshot of a Site's metadata, created by "Publish
+// version". Mirrors StudyVersion. NEVER updated or deleted by the app.
+model SiteVersion {
+  id            String @id @default(cuid())
+  siteId        String
+  versionNumber Int
+
+  legalName        String
+  abbreviation     String?
+  country          String
+  orgType          SiteOrgType
+  description      String?
+  website          String?
+  governancePolicy String?
+
+  note        String?
+  createdById String?
+  createdAt   DateTime @default(now())
+
+  site      Site  @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  createdBy User? @relation("SiteVersionAuthor", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@unique([siteId, versionNumber])
+  @@index([siteId])
+}
+
+model SiteMembership {
+  id     String   @id @default(cuid())
+  siteId String
+  userId String
+  role   SiteRole
+
+  site Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([siteId, userId])
+}
+
+model Dataset {
+  id                  String               @id @default(cuid())
+  slug                String // unique per site (see @@unique below), not globally
+  siteId              String
+  site                Site                 @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  name                String
+  abbreviation        String?
+  sourceType          DatasetSourceType
+  careSetting         DatasetCareSetting[]
+  therapeuticAreas    String[]
+  sourceCodingSystems String[]
+  description         String?
+  visibility          Visibility           @default(PRIVATE)
+
+  // Coordinator approval (separate from visibility).
+  approvalStatus ApprovalStatus @default(DRAFT)
+  reviewNote     String?
+  submittedAt    DateTime?
+  reviewedAt     DateTime?
+  reviewedById   String?
+  reviewedBy     User?          @relation("DatasetReviewer", fields: [reviewedById], references: [id], onDelete: SetNull)
+
+  releases DatasetRelease[] // OMOP CDM data cuts
+  versions DatasetVersion[] // immutable catalog-metadata snapshots
+  matches  Match[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([siteId, slug]) // dataset URLs are /datasets/{siteSlug}/{datasetSlug}
+  @@index([siteId])
+  @@index([visibility])
+}
+
+// One row per OMOP CDM data cut ("release"). Fields map to the OMOP CDM_SOURCE
+// table. A refresh = a new DatasetRelease row (never an in-place edit). The
+// Achilles (AchillesRun/Result) and DQD (DqdRun/CheckResult) enrichment tiers
+// attach here. NOT to be confused with DatasetVersion (metadata snapshot).
+model DatasetRelease {
+  id        String  @id @default(cuid())
+  datasetId String
+  dataset   Dataset @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  label     String // human tag, e.g. "2024-Q1"
+
+  cdmSourceName                String?
+  cdmSourceAbbreviation        String?
+  cdmHolder                    String?
+  sourceDescription            String?
+  sourceDocumentationReference String?
+  cdmEtlReference              String?
+  sourceReleaseDate            DateTime?
+  cdmReleaseDate               DateTime?
+  cdmVersion                   CdmVersion?
+  vocabularyVersion            String?
+
+  status DatasetReleaseStatus @default(DRAFT)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([datasetId, label])
+  @@index([datasetId])
+}
+
+// Immutable, numbered snapshot of a Dataset's catalog metadata (the "listing"),
+// created by "Publish version". Mirrors StudyVersion/SiteVersion. NEVER updated
+// or deleted by the app. Distinct from DatasetRelease (the OMOP data cut).
+model DatasetVersion {
+  id            String @id @default(cuid())
+  datasetId     String
+  versionNumber Int
+
+  name                String
+  abbreviation        String?
+  sourceType          DatasetSourceType
+  careSetting         DatasetCareSetting[]
+  therapeuticAreas    String[]
+  sourceCodingSystems String[]
+  description         String?
+
+  note        String?
+  createdById String?
+  createdAt   DateTime @default(now())
+
+  dataset   Dataset @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  createdBy User?   @relation("DatasetVersionAuthor", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@unique([datasetId, versionNumber])
+  @@index([datasetId])
+}
+
+// ── Marketplace: Study ↔ Dataset matching ────────────────────────────────────
+// See docs/matching-and-dashboard.md. Tier-1 (METADATA) matches are computed
+// from coarse catalogue metadata today; CHARACTERIZATION/DIAGNOSTICS tiers attach
+// once datasets have Achilles/DQD (D2/D3) and studies have structured concept
+// sets (Layer C). A Match is one row per (study, dataset) pair; triage state is
+// tracked per side because a match has two owners.
+
+enum MatchBand {
+  STRONG
+  POSSIBLE
+  WEAK
+}
+
+enum MatchTier {
+  METADATA
+  CHARACTERIZATION
+  DIAGNOSTICS
+}
+
+enum MatchSideState {
+  NEW
+  VIEWED
+  SAVED
+  DISMISSED
+}
+
+enum MatchRunTrigger {
+  ON_DEMAND
+  SCHEDULED
+}
+
+enum MatchRunScope {
+  SINGLE_STUDY
+  SINGLE_DATASET
+  USER
+  DELTA
+  FULL
+}
+
+model Match {
+  id               String    @id @default(cuid())
+  studyId          String
+  datasetId        String
+  datasetReleaseId String? // the OMOP release a characterization tier evaluated (Tier-2+)
+  score            Int // 0..100
+  band             MatchBand
+  tier             MatchTier @default(METADATA)
+  rationale        Json // per-signal contributions + human-readable strings
+
+  // Per-side triage (a match is seen by both the study owner and the site owner).
+  studyOwnerState MatchSideState @default(NEW)
+  siteOwnerState  MatchSideState @default(NEW)
+
+  matchRunId String?
+  computedAt DateTime @default(now())
+
+  study    Study     @relation(fields: [studyId], references: [id], onDelete: Cascade)
+  dataset  Dataset   @relation(fields: [datasetId], references: [id], onDelete: Cascade)
+  matchRun MatchRun? @relation(fields: [matchRunId], references: [id], onDelete: SetNull)
+
+  @@unique([studyId, datasetId])
+  @@index([studyId])
+  @@index([datasetId])
+  @@index([band])
+}
+
+model MatchRun {
+  id             String          @id @default(cuid())
+  trigger        MatchRunTrigger
+  scope          MatchRunScope
+  targetId       String? // study/dataset/user id for single/user scope
+  triggeredById  String?
+  startedAt      DateTime        @default(now())
+  finishedAt     DateTime?
+  evaluatedCount Int             @default(0)
+  createdCount   Int             @default(0)
+  updatedCount   Int             @default(0)
+  removedCount   Int             @default(0)
+
+  triggeredBy User?   @relation(fields: [triggeredById], references: [id], onDelete: SetNull)
+  matches     Match[]
+}

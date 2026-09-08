@@ -1,0 +1,199 @@
+{
+  "common": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "account": "Account",
+    "viewAll": "View all →",
+    "or": "OR",
+    "none": "—",
+    "new": "New",
+    "edit": "Edit",
+    "description": "Description",
+    "owner": "Owner",
+    "team": "Team",
+    "versions": "Versions",
+    "unknown": "Unknown",
+    "visible": "Visible",
+    "private": "Private"
+  },
+  "theme": {
+    "heading": "Appearance",
+    "description": "Choose a theme. “System” follows your device’s light/dark setting.",
+    "light": "Light",
+    "system": "System",
+    "dark": "Dark"
+  },
+  "language": {
+    "heading": "Language",
+    "description": "Choose the language for the interface. “System default” uses this deployment’s configured language.",
+    "systemDefault": "System default",
+    "save": "Save language"
+  },
+  "landing": {
+    "goToDashboard": "Go to your dashboard →",
+    "signIn": "Sign in",
+    "signedInAs": "Signed in as {name}",
+    "dashboardHint": "The dashboard is only visible after signing in."
+  },
+  "login": {
+    "title": "Sign in",
+    "username": "Username",
+    "password": "Password",
+    "orcidButton": "Sign in with ORCID",
+    "demoHint": "Demo login — username <c>admin</c>, password <c>password123</c>",
+    "errors": {
+      "CredentialsSignin": "Invalid username or password.",
+      "OAuthSignin": "Could not start ORCID sign-in. Check the server configuration.",
+      "OAuthCallbackError": "ORCID sign-in failed. Please try again.",
+      "Configuration": "Auth is not fully configured yet (missing ORCID credentials or AUTH_SECRET).",
+      "default": "Sign-in failed. Please try again."
+    }
+  },
+  "dashboard": {
+    "welcome": "Welcome",
+    "welcomeName": "Welcome, {name}",
+    "subtitle": "Your studies, data sites, and where they match.",
+    "quick": {
+      "newStudy": "New study",
+      "enrollSite": "Enroll site",
+      "browseDatasets": "Browse datasets",
+      "reviewQueue": "Review queue",
+      "admin": "Admin"
+    },
+    "matchesHeading": "Your matches",
+    "runMatching": "Run matching now",
+    "datasetsMatchingStudies": "Datasets matching your studies",
+    "studiesAddressable": "Studies addressable by your datasets",
+    "emptyDatasets": "No dataset matches yet. Create a study, then run matching.",
+    "emptyStudies": "No study matches yet. Enroll a site + dataset, then run matching.",
+    "summaryStudies": "My studies",
+    "summarySites": "My sites",
+    "summaryDatasets": "My datasets"
+  },
+  "account": {
+    "title": "Account",
+    "subtitle": "Your identity and session details.",
+    "rowName": "Name",
+    "rowEmail": "Email",
+    "rowRole": "Role",
+    "rowUserId": "User ID",
+    "rowLoginMethod": "Login method",
+    "rowOrcid": "ORCID iD",
+    "emailNone": "— (ORCID does not share email)",
+    "loginMethodOrcid": "ORCID (federated)",
+    "loginMethodCredentials": "Username & password",
+    "loginMethodUnknown": "unknown"
+  },
+  "admin": {
+    "branding": {
+      "title": "Branding",
+      "subtitle": "Configure how this Evidence Network presents itself.",
+      "manageUsers": "Manage users",
+      "appName": "Application name",
+      "tagline": "Tagline",
+      "taglineHint": "Big headline on the landing page.",
+      "taglinePlaceholder": "e.g. Data4Life Evidence Network",
+      "landingIntro": "Landing intro",
+      "landingIntroHint": "Paragraph under the headline on the public landing page.",
+      "logoHeight": "Landing logo height (px)",
+      "logoHeightHint": "Height of the logo on the landing page (16–240).",
+      "accentColor": "Accent color",
+      "accentColorHint": "Hex color used for highlights.",
+      "logo": "Logo",
+      "logoHint": "PNG/SVG/JPG. Stored in the database; shown on the sign-in page.",
+      "currentLogo": "Current logo:",
+      "defaultLocale": "Default language",
+      "defaultLocaleHint": "Language used for anonymous pages and for users who haven’t chosen one.",
+      "enabledLocales": "Offered languages",
+      "enabledLocalesHint": "Languages users can choose from in their account.",
+      "save": "Save branding"
+    }
+  },
+  "labels": {
+    "approval": {
+      "DRAFT": "Draft",
+      "PENDING": "Pending review",
+      "APPROVED": "Approved",
+      "REJECTED": "Rejected"
+    },
+    "matchBand": {
+      "STRONG": "Strong",
+      "POSSIBLE": "Possible",
+      "WEAK": "Weak",
+      "NONE": "None"
+    },
+    "visibility": {
+      "PRIVATE": "Private",
+      "AUTHENTICATED": "Authenticated"
+    },
+    "systemRole": {
+      "USER": "User",
+      "COORDINATOR": "Coordinator",
+      "SUPERUSER": "Superuser"
+    },
+    "studyType": {
+      "CHARACTERIZATION": "Characterization",
+      "POPULATION_LEVEL_ESTIMATION": "Population-level estimation",
+      "PATIENT_LEVEL_PREDICTION": "Patient-level prediction"
+    },
+    "studyDesignType": {
+      "COHORT": "Cohort",
+      "CASE_CONTROL": "Case-control",
+      "CASE_ONLY": "Case-only",
+      "CROSS_SECTIONAL": "Cross-sectional",
+      "SELF_CONTROLLED": "Self-controlled",
+      "OTHER": "Other"
+    },
+    "studyScope": {
+      "SAFETY": "Safety",
+      "EFFECTIVENESS": "Effectiveness",
+      "DRUG_UTILISATION": "Drug utilisation",
+      "DISEASE_EPIDEMIOLOGY": "Disease epidemiology",
+      "METHOD_DEVELOPMENT": "Method development",
+      "OTHER": "Other"
+    },
+    "studyStatus": {
+      "DRAFT": "Draft",
+      "PROPOSED": "Proposed",
+      "RECRUITING": "Recruiting",
+      "DESIGN_FINALIZED": "Design finalized",
+      "EXECUTING": "Executing",
+      "RESULTS_AVAILABLE": "Results available",
+      "COMPLETE": "Complete",
+      "SUSPENDED": "Suspended"
+    },
+    "siteOrgType": {
+      "ACADEMIC": "Academic",
+      "HOSPITAL": "Hospital",
+      "REGISTRY_HOLDER": "Registry holder",
+      "GOVERNMENT": "Government",
+      "INDUSTRY": "Industry",
+      "NON_PROFIT": "Non-profit",
+      "OTHER": "Other"
+    },
+    "datasetSourceType": {
+      "EHR": "EHR",
+      "CLAIMS": "Claims",
+      "HOSPITAL": "Hospital",
+      "REGISTRY": "Registry",
+      "OTHER": "Other"
+    },
+    "datasetCareSetting": {
+      "PRIMARY_CARE": "Primary care",
+      "INPATIENT": "Inpatient",
+      "OUTPATIENT": "Outpatient",
+      "EMERGENCY": "Emergency",
+      "OTHER": "Other"
+    },
+    "datasetReleaseStatus": {
+      "DRAFT": "Draft",
+      "PUBLISHED": "Published",
+      "ARCHIVED": "Archived"
+    }
+  }
+}

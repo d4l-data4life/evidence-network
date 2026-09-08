@@ -1,0 +1,13 @@
+{
+  "review": {
+    "title": "Cola de revisión",
+    "subtitle": "Aprueba o rechaza estudios y conjuntos de datos enviados para publicación.",
+    "errorOwn": "No puedes revisar tus propios envíos (ni los de tu equipo).",
+    "empty": "Nada pendiente de revisión por ahora.",
+    "studiesHeading": "Estudios ({count})",
+    "datasetsHeading": "Conjuntos de datos ({count})",
+    "notePlaceholder": "Motivo (obligatorio si se rechaza)",
+    "approve": "Aprobar",
+    "reject": "Rechazar"
+  }
+}

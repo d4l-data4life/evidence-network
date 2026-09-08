@@ -1,0 +1,47 @@
+{
+  "default": {
+    "appName": "Data4Life Evidence Network",
+    "tagline": "Federated evidence for digital health",
+    "landingIntro": "A hub to share about datasets, and to discover and join digital health studies.",
+    "accentColor": "#A6CE39",
+    "logoHeight": 48,
+    "defaultLocale": "en",
+    "enabledLocales": ["en", "pt-BR", "es"]
+  },
+  "data-library": {
+    "appName": "Data4Life Data Library",
+    "tagline": "The Data4Life evidence node",
+    "landingIntro": "The Data4Life node for sharing datasets and discovering digital health studies across the network.",
+    "accentColor": "#A6CE39",
+    "logoHeight": 48,
+    "defaultLocale": "en",
+    "enabledLocales": ["en", "es", "pt-BR"]
+  },
+  "champs": {
+    "appName": "CHAMPS Evidence Network",
+    "tagline": "Child Health and Mortality Prevention Surveillance",
+    "landingIntro": "Share surveillance datasets and discover collaborative studies across the CHAMPS network.",
+    "accentColor": "#0E7C7B",
+    "logoHeight": 48,
+    "defaultLocale": "en",
+    "enabledLocales": ["en", "pt-BR", "es"]
+  },
+  "latam": {
+    "appName": "Red de Evidencia LATAM",
+    "tagline": "Red de Evidencia en Salud Digital para América Latina",
+    "landingIntro": "Un espacio para compartir conjuntos de datos y descubrir y unirse a estudios de salud digital.",
+    "accentColor": "#C1440E",
+    "logoHeight": 48,
+    "defaultLocale": "es",
+    "enabledLocales": ["es", "pt-BR", "en"]
+  },
+  "ohdsi-wg": {
+    "appName": "OHDSI Evidence Network",
+    "tagline": "Observational Health Data Sciences and Informatics",
+    "landingIntro": "The OHDSI Evidence Network Working Group hub for registering datasets and coordinating network studies.",
+    "accentColor": "#20425A",
+    "logoHeight": 48,
+    "defaultLocale": "en",
+    "enabledLocales": ["en", "es", "pt-BR"]
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "sites": {
+    "title": "Sites & datasets",
+    "subtitle": "Enroll your organization as a data partner, then register its OMOP datasets.",
+    "enrollSite": "Enroll a site",
+    "errorForbidden": "You don’t have permission to manage that site.",
+    "empty": "You haven’t enrolled a site yet. Start with “Enroll a site”.",
+    "datasetCount": "{count, plural, one {# dataset} other {# datasets}}",
+
+    "addDataset": "Add dataset",
+    "datasetsHeading": "Datasets",
+    "noDatasetsManage": "No datasets yet. Add one with “Add dataset”.",
+    "noDatasetsVisible": "No visible datasets for this site.",
+    "releaseCount": "{count, plural, one {# release} other {# releases}}",
+
+    "publishVersion": "Publish version {n}",
+    "unpublishedChanges": "The current site has unpublished changes since v{n}.",
+    "noVersionsDraft": "This site has no published versions yet — the current content is a working draft.",
+    "noVersions": "No published versions yet.",
+    "readonlySnapshotInline": "read-only snapshot",
+    "manageHint": "You manage this site. <link>Browse all visible datasets →</link>",
+
+    "editTitle": "Edit site",
+    "editSubtitle": "Changes update the working copy. Publish a version to freeze an immutable snapshot.",
+    "errorMissing": "Please provide a legal name, country, and organization type.",
+    "saveChanges": "Save changes",
+
+    "enrollTitle": "Enroll a site",
+    "enrollSubtitle": "Register your organization as a data partner (the custodian that holds the data).",
+    "enrollSubmit": "Enroll site",
+
+    "currentSite": "Current site",
+    "versionBadge": "Version {n}",
+    "readonlySnapshotBadge": "Read-only snapshot",
+    "frozen": "Frozen {date}.",
+    "frozenBy": "Frozen {date} by {name}.",
+    "immutableSuffix": "Immutable — edits apply to the current site, not to published versions.",
+    "noteLabel": "Note:",
+    "website": "Website",
+    "governanceAccess": "Governance / access",
+
+    "fields": {
+      "legalName": "Legal name",
+      "legalNamePlaceholder": "e.g. University Medical Center Utrecht",
+      "abbreviation": "Abbreviation",
+      "abbreviationPlaceholder": "e.g. UMCU",
+      "country": "Country",
+      "countryHint": "ISO country code or name.",
+      "countryPlaceholder": "e.g. NL",
+      "orgType": "Organization type",
+      "description": "Description",
+      "descriptionPlaceholder": "About the data partner",
+      "website": "Website",
+      "websitePlaceholder": "https://…",
+      "governanceContact": "Governance / access contact",
+      "governanceContactHint": "How researchers request data access.",
+      "governancePlaceholder": "Governance policy or contact"
+    }
+  }
+}

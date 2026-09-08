@@ -1,0 +1,63 @@
+# Local containerized stack: Postgres + one-off migrate/seed + the Next.js app.
+#   docker compose up --build   → http://127.0.0.1:3000
+#
+# Env values come from the .env file in this directory (copy from .env.example).
+# Use 127.0.0.1 (not localhost) in the browser so the ORCID redirect URI matches.
+
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-evidence}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-evidence}
+      POSTGRES_DB: ${POSTGRES_DB:-evidence}
+    ports:
+      # Exposed on the host so `prisma migrate` / psql can reach it too.
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-evidence} -d ${POSTGRES_DB:-evidence}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Runs `prisma migrate deploy` + seed once, then exits.
+  migrate:
+    build:
+      context: .
+      target: migrator
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: "postgresql://${POSTGRES_USER:-evidence}:${POSTGRES_PASSWORD:-evidence}@db:5432/${POSTGRES_DB:-evidence}?schema=public"
+
+  app:
+    build:
+      context: .
+      target: runner
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        # Only start once migrations + seed have finished successfully.
+        condition: service_completed_successfully
+    environment:
+      # Inside the compose network the DB host is the `db` service, not localhost.
+      DATABASE_URL: "postgresql://${POSTGRES_USER:-evidence}:${POSTGRES_PASSWORD:-evidence}@db:5432/${POSTGRES_DB:-evidence}?schema=public"
+      AUTH_SECRET: ${AUTH_SECRET}
+      AUTH_URL: ${AUTH_URL:-http://evidence.test:3000}
+      # Auth.js v5 trusts the AUTH_URL host behind the compose proxy.
+      AUTH_TRUST_HOST: "true"
+      AUTH_DEBUG: ${AUTH_DEBUG:-false}
+      ORCID_ISSUER: ${ORCID_ISSUER:-https://sandbox.orcid.org}
+      ORCID_CLIENT_ID: ${ORCID_CLIENT_ID}
+      ORCID_CLIENT_SECRET: ${ORCID_CLIENT_SECRET}
+    ports:
+      - "3000:3000"
+
+volumes:
+  db-data:

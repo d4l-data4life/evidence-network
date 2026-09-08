@@ -1,0 +1,60 @@
+{
+  "sites": {
+    "title": "Sitios y conjuntos de datos",
+    "subtitle": "Registra tu organización como socia de datos y luego registra sus conjuntos de datos OMOP.",
+    "enrollSite": "Registrar sitio",
+    "errorForbidden": "No tienes permiso para gestionar ese sitio.",
+    "empty": "Aún no has registrado un sitio. Empieza con “Registrar sitio”.",
+    "datasetCount": "{count, plural, one {# conjunto de datos} other {# conjuntos de datos}}",
+
+    "addDataset": "Añadir conjunto de datos",
+    "datasetsHeading": "Conjuntos de datos",
+    "noDatasetsManage": "Aún no hay conjuntos de datos. Añade uno con “Añadir conjunto de datos”.",
+    "noDatasetsVisible": "No hay conjuntos de datos visibles para este sitio.",
+    "releaseCount": "{count, plural, one {# release} other {# releases}}",
+
+    "publishVersion": "Publicar versión {n}",
+    "unpublishedChanges": "El sitio actual tiene cambios sin publicar desde la v{n}.",
+    "noVersionsDraft": "Este sitio aún no tiene versiones publicadas: el contenido actual es un borrador de trabajo.",
+    "noVersions": "Aún no hay versiones publicadas.",
+    "readonlySnapshotInline": "instantánea de solo lectura",
+    "manageHint": "Gestionas este sitio. <link>Ver todos los conjuntos de datos visibles →</link>",
+
+    "editTitle": "Editar sitio",
+    "editSubtitle": "Los cambios actualizan la copia de trabajo. Publica una versión para congelar una instantánea inmutable.",
+    "errorMissing": "Indica la razón social, el país y el tipo de organización.",
+    "saveChanges": "Guardar cambios",
+
+    "enrollTitle": "Registrar sitio",
+    "enrollSubtitle": "Registra tu organización como socia de datos (la custodia que posee los datos).",
+    "enrollSubmit": "Registrar sitio",
+
+    "currentSite": "Sitio actual",
+    "versionBadge": "Versión {n}",
+    "readonlySnapshotBadge": "Instantánea de solo lectura",
+    "frozen": "Congelado el {date}.",
+    "frozenBy": "Congelado el {date} por {name}.",
+    "immutableSuffix": "Inmutable: las ediciones se aplican al sitio actual, no a las versiones publicadas.",
+    "noteLabel": "Nota:",
+    "website": "Sitio web",
+    "governanceAccess": "Gobernanza / acceso",
+
+    "fields": {
+      "legalName": "Razón social",
+      "legalNamePlaceholder": "p. ej. University Medical Center Utrecht",
+      "abbreviation": "Abreviatura",
+      "abbreviationPlaceholder": "p. ej. UMCU",
+      "country": "País",
+      "countryHint": "Código ISO del país o nombre.",
+      "countryPlaceholder": "p. ej. NL",
+      "orgType": "Tipo de organización",
+      "description": "Descripción",
+      "descriptionPlaceholder": "Sobre la socia de datos",
+      "website": "Sitio web",
+      "websitePlaceholder": "https://…",
+      "governanceContact": "Contacto de gobernanza / acceso",
+      "governanceContactHint": "Cómo solicitan los investigadores el acceso a los datos.",
+      "governancePlaceholder": "Política de gobernanza o contacto"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "studies": {
+    "title": "Studies",
+    "subtitle": "Network study proposals and designs in the marketplace.",
+    "new": "New study",
+    "empty": "No studies yet. Create the first one with “New study”.",
+    "unknownOwner": "Unknown owner",
+    "editTitle": "Edit study",
+    "editSubtitle": "Changes update the working copy. Publish a version to freeze an immutable snapshot.",
+    "newSubtitle": "Catalog a study. The executable design (cohorts/analyses) is linked externally for now.",
+    "errorMissing": "Please provide at least a title and a study type.",
+    "saveChanges": "Save changes",
+    "createStudy": "Create study",
+    "currentStudy": "Current study",
+    "scope": "Scope",
+    "conditions": "Conditions",
+    "keywords": "Keywords",
+    "objective": "Objective",
+    "designReference": "Design reference",
+    "designRefEmpty": "— (attach a Strategus/GitHub repo)",
+    "submitForPublication": "Submit for publication",
+    "withdraw": "Withdraw",
+    "rejected": "Rejected: {note}",
+    "publishVersion": "Publish version {n}",
+    "version": "Version {n}",
+    "unpublishedSince": "The current study has unpublished changes since v{n}.",
+    "noVersionsDraft": "This study has no published versions yet — the current content is a working draft.",
+    "noVersions": "No published versions yet.",
+    "snapshotNote": "read-only snapshot",
+    "snapshotBadge": "Read-only snapshot",
+    "frozenByOn": "Frozen {date} by {name}.",
+    "frozenOn": "Frozen {date}.",
+    "snapshotImmutable": "This snapshot is immutable — edits apply to the current study, not to published versions.",
+    "note": "Note",
+    "pub": {
+      "published": "Published — visible to all authenticated users.",
+      "submitted": "Submitted — awaiting coordinator review.",
+      "approved": "Approved. Set visibility to “Authenticated” (via Edit) to make it visible.",
+      "notPublished": "Not published. Submit for coordinator approval to publish."
+    },
+    "role": {
+      "LEAD": "Lead",
+      "COORDINATOR": "Coordinator",
+      "DESIGNER": "Designer",
+      "STATISTICIAN": "Statistician",
+      "COLLABORATOR": "Collaborator"
+    },
+    "field": {
+      "title": "Title",
+      "acronym": "Acronym",
+      "studyType": "Study type",
+      "designType": "Design type",
+      "status": "Status",
+      "visibility": "Visibility"
+    },
+    "hint": {
+      "scope": "Select all that apply.",
+      "conditions": "Comma-separated (MedDRA terms later).",
+      "keywords": "Comma-separated.",
+      "designRef": "Link to the Strategus/GitHub study repo (Phase A).",
+      "visibility": "“Authenticated” = visible to any signed-in user (never anonymous)."
+    },
+    "ph": {
+      "title": "e.g. Comparative safety of DPP-4 inhibitors",
+      "acronym": "Optional short name",
+      "description": "What the study is about",
+      "objective": "Primary objective",
+      "conditions": "e.g. type 2 diabetes, heart failure",
+      "keywords": "e.g. safety, comparative effectiveness"
+    }
+  }
+}

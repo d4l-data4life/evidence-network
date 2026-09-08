@@ -1,0 +1,13 @@
+{
+  "review": {
+    "title": "Review queue",
+    "subtitle": "Approve or reject studies and datasets submitted for publication.",
+    "errorOwn": "You can’t review your own (or your team’s) submissions.",
+    "empty": "Nothing awaiting review right now.",
+    "studiesHeading": "Studies ({count})",
+    "datasetsHeading": "Datasets ({count})",
+    "notePlaceholder": "Reason (required if rejecting)",
+    "approve": "Approve",
+    "reject": "Reject"
+  }
+}

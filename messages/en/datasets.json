@@ -1,0 +1,93 @@
+{
+  "datasets": {
+    "title": "Datasets",
+    "subtitle": "OMOP databases published across the network.",
+    "empty": "No datasets are visible yet. Enroll a site and add one under <area>Sites & datasets</area>.",
+    "releaseCount": "{count, plural, one {# release} other {# releases}}",
+
+    "addRelease": "Add release",
+    "makePrivate": "Make private",
+    "makeVisible": "Make visible",
+    "pubPublished": "Published — visible to all authenticated users.",
+    "pubSubmitted": "Submitted — awaiting coordinator review.",
+    "pubApproved": "Approved. Set visibility to “Authenticated” to make it visible.",
+    "pubNotPublished": "Not published. Submit for coordinator approval to publish.",
+    "submitForPublication": "Submit for publication",
+    "withdraw": "Withdraw",
+    "rejected": "Rejected: {note}",
+
+    "releasesHeading": "Releases (OMOP data cuts)",
+    "releasesHelp": "Each release is one OMOP CDM data cut (a published release is immutable). Achilles & DQD result pushes (tiers D2/D3) will attach per release later.",
+    "noReleases": "No releases yet.",
+    "noReleasesHint": "Add the first data cut with “Add release”.",
+    "releaseMeta": "CDM {cdm} · vocab {vocab} · source cut {date}",
+
+    "metadataVersionsHeading": "Metadata versions",
+    "publishVersion": "Publish version {n}",
+    "unpublishedChanges": "The catalog metadata has unpublished changes since v{n}.",
+    "noVersionsDraft": "This dataset's metadata has no published versions yet — the current content is a working draft.",
+    "noMetadataVersions": "No published metadata versions yet.",
+    "readonlySnapshotInline": "read-only snapshot",
+
+    "currentDataset": "Current dataset",
+    "versionBadge": "Version {n}",
+    "readonlySnapshotBadge": "Read-only snapshot",
+    "frozen": "Frozen {date}.",
+    "frozenBy": "Frozen {date} by {name}.",
+    "immutableSuffix": "Immutable — edits apply to the current dataset, not to published versions.",
+    "noteLabel": "Note:",
+
+    "editTitle": "Edit dataset",
+    "editSubtitle": "Edits the catalog metadata (working copy). Publish a version to freeze an immutable snapshot. (Data cuts are managed as releases.)",
+    "errorMissing": "Please provide at least a name and a source type.",
+    "saveChanges": "Save changes",
+
+    "addTitle": "Add dataset",
+    "addSubtitle": "An OMOP database held by {site}.",
+    "addDataset": "Add dataset",
+
+    "addReleaseTitle": "Add dataset release",
+    "addReleaseSubtitle": "A new OMOP CDM data cut for {name}. Fields map to the OMOP CDM_SOURCE table. A published release is immutable — add a new one for a refresh.",
+    "errorReleaseLabel": "Please provide at least a release label.",
+
+    "releaseForm": {
+      "label": "Release label",
+      "labelHint": "e.g. 2024-Q1 (unique per dataset).",
+      "cdmSourceName": "CDM source name",
+      "cdmSourceNameHint": "CDM_SOURCE.cdm_source_name",
+      "cdmSourceAbbreviation": "CDM source abbreviation",
+      "cdmHolder": "CDM holder",
+      "cdmVersion": "CDM version",
+      "vocabularyVersion": "Vocabulary version",
+      "vocabularyVersionHint": "e.g. v5.0 31-AUG-23",
+      "sourceReleaseDate": "Source release date",
+      "sourceReleaseDateHint": "Date of the underlying data cut.",
+      "cdmReleaseDate": "CDM release date",
+      "cdmReleaseDateHint": "Date this CDM build was produced.",
+      "etlReference": "ETL reference",
+      "etlReferenceHint": "CDM_SOURCE.cdm_etl_reference (link/doc).",
+      "sourceDescription": "Source description",
+      "status": "Status"
+    },
+
+    "fields": {
+      "name": "Name",
+      "namePlaceholder": "e.g. IPCI primary care database",
+      "abbreviation": "Abbreviation",
+      "abbreviationPlaceholder": "e.g. IPCI",
+      "sourceType": "Source type",
+      "careSetting": "Care setting",
+      "careSettingHint": "Select all that apply.",
+      "therapeuticAreas": "Therapeutic areas",
+      "therapeuticAreasHint": "Comma-separated.",
+      "therapeuticAreasPlaceholder": "e.g. cardiology, oncology",
+      "sourceCodingSystems": "Source coding systems",
+      "sourceCodingSystemsHint": "Comma-separated (pre-ETL vocabularies).",
+      "sourceCodingSystemsPlaceholder": "e.g. ICD-10, SNOMED",
+      "description": "Description",
+      "descriptionPlaceholder": "About the database",
+      "visibility": "Visibility",
+      "visibilityHint": "“Authenticated” = visible to any signed-in user (never anonymous)."
+    }
+  }
+}

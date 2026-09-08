@@ -1,0 +1,199 @@
+{
+  "common": {
+    "signIn": "Iniciar sesión",
+    "signOut": "Cerrar sesión",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "back": "Volver",
+    "home": "Inicio",
+    "dashboard": "Panel",
+    "account": "Cuenta",
+    "viewAll": "Ver todo →",
+    "or": "O",
+    "none": "—",
+    "new": "Nuevo",
+    "edit": "Editar",
+    "description": "Descripción",
+    "owner": "Propietario",
+    "team": "Equipo",
+    "versions": "Versiones",
+    "unknown": "Desconocido",
+    "visible": "Visible",
+    "private": "Privado"
+  },
+  "theme": {
+    "heading": "Apariencia",
+    "description": "Elige un tema. «Sistema» sigue la configuración de claro/oscuro de tu dispositivo.",
+    "light": "Claro",
+    "system": "Sistema",
+    "dark": "Oscuro"
+  },
+  "language": {
+    "heading": "Idioma",
+    "description": "Elige el idioma de la interfaz. «Predeterminado del sistema» usa el idioma configurado en esta instancia.",
+    "systemDefault": "Predeterminado del sistema",
+    "save": "Guardar idioma"
+  },
+  "landing": {
+    "goToDashboard": "Ir a tu panel →",
+    "signIn": "Iniciar sesión",
+    "signedInAs": "Sesión iniciada como {name}",
+    "dashboardHint": "El panel solo es visible tras iniciar sesión."
+  },
+  "login": {
+    "title": "Iniciar sesión",
+    "username": "Usuario",
+    "password": "Contraseña",
+    "orcidButton": "Iniciar sesión con ORCID",
+    "demoHint": "Acceso de demostración — usuario <c>admin</c>, contraseña <c>password123</c>",
+    "errors": {
+      "CredentialsSignin": "Usuario o contraseña no válidos.",
+      "OAuthSignin": "No se pudo iniciar el acceso con ORCID. Revisa la configuración del servidor.",
+      "OAuthCallbackError": "Error en el acceso con ORCID. Inténtalo de nuevo.",
+      "Configuration": "La autenticación aún no está completamente configurada (faltan credenciales de ORCID o AUTH_SECRET).",
+      "default": "Error al iniciar sesión. Inténtalo de nuevo."
+    }
+  },
+  "dashboard": {
+    "welcome": "Bienvenido/a",
+    "welcomeName": "Bienvenido/a, {name}",
+    "subtitle": "Tus estudios, sitios de datos y dónde coinciden.",
+    "quick": {
+      "newStudy": "Nuevo estudio",
+      "enrollSite": "Registrar sitio",
+      "browseDatasets": "Explorar conjuntos de datos",
+      "reviewQueue": "Cola de revisión",
+      "admin": "Administración"
+    },
+    "matchesHeading": "Tus coincidencias",
+    "runMatching": "Ejecutar coincidencia ahora",
+    "datasetsMatchingStudies": "Conjuntos de datos que coinciden con tus estudios",
+    "studiesAddressable": "Estudios abordables con tus conjuntos de datos",
+    "emptyDatasets": "Aún no hay coincidencias de conjuntos de datos. Crea un estudio y ejecuta la coincidencia.",
+    "emptyStudies": "Aún no hay coincidencias de estudios. Registra un sitio y un conjunto de datos y ejecuta la coincidencia.",
+    "summaryStudies": "Mis estudios",
+    "summarySites": "Mis sitios",
+    "summaryDatasets": "Mis conjuntos de datos"
+  },
+  "account": {
+    "title": "Cuenta",
+    "subtitle": "Tu identidad y los detalles de la sesión.",
+    "rowName": "Nombre",
+    "rowEmail": "Correo electrónico",
+    "rowRole": "Rol",
+    "rowUserId": "ID de usuario",
+    "rowLoginMethod": "Método de acceso",
+    "rowOrcid": "ORCID iD",
+    "emailNone": "— (ORCID no comparte el correo electrónico)",
+    "loginMethodOrcid": "ORCID (federado)",
+    "loginMethodCredentials": "Usuario y contraseña",
+    "loginMethodUnknown": "desconocido"
+  },
+  "admin": {
+    "branding": {
+      "title": "Identidad visual",
+      "subtitle": "Configura cómo se presenta esta Evidence Network.",
+      "manageUsers": "Gestionar usuarios",
+      "appName": "Nombre de la aplicación",
+      "tagline": "Eslogan",
+      "taglineHint": "Título principal en la página de inicio.",
+      "taglinePlaceholder": "p. ej. Data4Life Evidence Network",
+      "landingIntro": "Introducción de la página de inicio",
+      "landingIntroHint": "Párrafo bajo el título en la página de inicio pública.",
+      "logoHeight": "Altura del logo (px)",
+      "logoHeightHint": "Altura del logo en la página de inicio (16–240).",
+      "accentColor": "Color de acento",
+      "accentColorHint": "Color hexadecimal usado para resaltados.",
+      "logo": "Logo",
+      "logoHint": "PNG/SVG/JPG. Se guarda en la base de datos; se muestra en la página de acceso.",
+      "currentLogo": "Logo actual:",
+      "defaultLocale": "Idioma predeterminado",
+      "defaultLocaleHint": "Idioma usado en páginas anónimas y para usuarios que no han elegido uno.",
+      "enabledLocales": "Idiomas ofrecidos",
+      "enabledLocalesHint": "Idiomas que los usuarios pueden elegir en su cuenta.",
+      "save": "Guardar identidad visual"
+    }
+  },
+  "labels": {
+    "approval": {
+      "DRAFT": "Borrador",
+      "PENDING": "En revisión",
+      "APPROVED": "Aprobado",
+      "REJECTED": "Rechazado"
+    },
+    "matchBand": {
+      "STRONG": "Fuerte",
+      "POSSIBLE": "Posible",
+      "WEAK": "Débil",
+      "NONE": "Ninguno"
+    },
+    "visibility": {
+      "PRIVATE": "Privado",
+      "AUTHENTICATED": "Autenticado"
+    },
+    "systemRole": {
+      "USER": "Usuario",
+      "COORDINATOR": "Coordinador",
+      "SUPERUSER": "Superusuario"
+    },
+    "studyType": {
+      "CHARACTERIZATION": "Caracterización",
+      "POPULATION_LEVEL_ESTIMATION": "Estimación a nivel poblacional",
+      "PATIENT_LEVEL_PREDICTION": "Predicción a nivel de paciente"
+    },
+    "studyDesignType": {
+      "COHORT": "Cohorte",
+      "CASE_CONTROL": "Casos y controles",
+      "CASE_ONLY": "Solo casos",
+      "CROSS_SECTIONAL": "Transversal",
+      "SELF_CONTROLLED": "Autocontrolado",
+      "OTHER": "Otro"
+    },
+    "studyScope": {
+      "SAFETY": "Seguridad",
+      "EFFECTIVENESS": "Efectividad",
+      "DRUG_UTILISATION": "Utilización de medicamentos",
+      "DISEASE_EPIDEMIOLOGY": "Epidemiología de enfermedades",
+      "METHOD_DEVELOPMENT": "Desarrollo de métodos",
+      "OTHER": "Otro"
+    },
+    "studyStatus": {
+      "DRAFT": "Borrador",
+      "PROPOSED": "Propuesto",
+      "RECRUITING": "Reclutando",
+      "DESIGN_FINALIZED": "Diseño finalizado",
+      "EXECUTING": "En ejecución",
+      "RESULTS_AVAILABLE": "Resultados disponibles",
+      "COMPLETE": "Completado",
+      "SUSPENDED": "Suspendido"
+    },
+    "siteOrgType": {
+      "ACADEMIC": "Académico",
+      "HOSPITAL": "Hospital",
+      "REGISTRY_HOLDER": "Titular de registro",
+      "GOVERNMENT": "Gobierno",
+      "INDUSTRY": "Industria",
+      "NON_PROFIT": "Sin fines de lucro",
+      "OTHER": "Otro"
+    },
+    "datasetSourceType": {
+      "EHR": "EHR",
+      "CLAIMS": "Reclamaciones",
+      "HOSPITAL": "Hospital",
+      "REGISTRY": "Registro",
+      "OTHER": "Otro"
+    },
+    "datasetCareSetting": {
+      "PRIMARY_CARE": "Atención primaria",
+      "INPATIENT": "Hospitalización",
+      "OUTPATIENT": "Ambulatorio",
+      "EMERGENCY": "Urgencias",
+      "OTHER": "Otro"
+    },
+    "datasetReleaseStatus": {
+      "DRAFT": "Borrador",
+      "PUBLISHED": "Publicado",
+      "ARCHIVED": "Archivado"
+    }
+  }
+}

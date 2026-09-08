@@ -1,0 +1,13 @@
+{
+  "review": {
+    "title": "Fila de revisão",
+    "subtitle": "Aprove ou rejeite estudos e conjuntos de dados enviados para publicação.",
+    "errorOwn": "Você não pode revisar seus próprios envios (ou os da sua equipe).",
+    "empty": "Nada aguardando revisão no momento.",
+    "studiesHeading": "Estudos ({count})",
+    "datasetsHeading": "Conjuntos de dados ({count})",
+    "notePlaceholder": "Motivo (obrigatório se rejeitar)",
+    "approve": "Aprovar",
+    "reject": "Rejeitar"
+  }
+}
