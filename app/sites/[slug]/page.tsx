@@ -62,6 +62,12 @@ export default async function SiteDetailPage({
           canManage ? (
             <div className="flex items-center gap-2">
               <Link
+                href={`/sites/${site.slug}/keys`}
+                className="rounded-full border border-black/15 dark:border-white/25 px-4 py-1.5 text-sm font-medium hover:border-foreground transition"
+              >
+                {t("keys.manage")}
+              </Link>
+              <Link
                 href={`/sites/${site.slug}/edit`}
                 className="rounded-full border border-black/15 dark:border-white/25 px-4 py-1.5 text-sm font-medium hover:border-foreground transition"
               >

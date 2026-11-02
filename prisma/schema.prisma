@@ -68,6 +68,7 @@ model User {
   datasetVersions  DatasetVersion[]  @relation("DatasetVersionAuthor")
   reviewedStudies  Study[]           @relation("StudyReviewer")
   reviewedDatasets Dataset[]         @relation("DatasetReviewer")
+  apiKeys          ApiKey[]          @relation("ApiKeyCreator")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -349,11 +350,34 @@ model Site {
   members  SiteMembership[]
   datasets Dataset[]
   versions SiteVersion[]
+  apiKeys  ApiKey[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([ownerId])
+}
+
+// Machine credential a data partner uses to push analytics results (DQD now,
+// Achilles later) for its site's dataset releases. Site-scoped: one key can
+// push for any dataset/release under `site`. Only a sha256 of the secret is
+// stored; the plaintext is shown once at creation. See docs/dqd-integration.md.
+model ApiKey {
+  id          String   @id @default(cuid())
+  siteId      String
+  site        Site     @relation(fields: [siteId], references: [id], onDelete: Cascade)
+  name        String // human label, e.g. "IPCI DQD pusher"
+  prefix      String   @unique // public id, e.g. "enk_live_ab12cd34" — lookup + display
+  hashedKey   String // sha256(secret) hex; never store the plaintext
+  scopes      String[] @default(["dqd:write"])
+  createdById String
+  createdBy   User     @relation("ApiKeyCreator", fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+  lastUsedAt  DateTime?
+  expiresAt   DateTime?
+  revokedAt   DateTime?
+
+  @@index([siteId])
 }
 
 // Immutable, numbered snapshot of a Site's metadata, created by "Publish
@@ -453,11 +477,47 @@ model DatasetRelease {
 
   status DatasetReleaseStatus @default(DRAFT)
 
+  dqdResults DqdResult[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@unique([datasetId, label])
   @@index([datasetId])
+}
+
+// One DQD (DataQualityDashboard) push for a DatasetRelease. Replace-latest with
+// history: a new push supersedes the current row (supersededAt set) rather than
+// overwriting it. The raw payload is untrusted, partner-supplied JSON — stored
+// gzipped and never executed/rendered as HTML. See docs/dqd-integration.md.
+model DqdResult {
+  id        String         @id @default(cuid())
+  releaseId String
+  release   DatasetRelease @relation(fields: [releaseId], references: [id], onDelete: Cascade)
+
+  uploadedAt      DateTime  @default(now())
+  uploadedByKeyId String? // ApiKey.id at push time (provenance; key may be revoked later)
+  supersededAt    DateTime? // null = current result for the release
+
+  // parsed summary — cheap to read for lists/badges/matching
+  dqdVersion         String?
+  cdmVersion         String?
+  vocabularyVersion  String?
+  executionDate      DateTime?
+  countTotal         Int
+  countPassed        Int
+  countFailed        Int
+  countError         Int
+  countNotApplicable Int
+  pctPassed          Float
+  breakdown          Json // { byCategory, byCheckLevel, byContext }
+  warnings           Json? // e.g. metadata mismatch vs the release
+
+  // full payload for the detailed viewer
+  payload      Bytes // gzipped DQD JSON
+  payloadBytes Int
+
+  @@index([releaseId, supersededAt])
 }
 
 // Immutable, numbered snapshot of a Dataset's catalog metadata (the "listing"),

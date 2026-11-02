@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/session";
 import { getCurrentUser, canReview } from "@/lib/rbac";
 import { uniqueSlug } from "@/lib/slug";
+import { generateApiKey } from "@/lib/apikey";
 
 function multi(formData: FormData, key: string): string[] {
   return formData.getAll(key).map(String).filter(Boolean);
@@ -400,4 +401,64 @@ export async function setDatasetVisibility(formData: FormData) {
   const path = `/datasets/${dataset!.site.slug}/${dataset!.slug}`;
   revalidatePath(path);
   redirect(path);
+}
+
+// ── API keys (site-scoped machine credentials for DQD/Achilles pushes) ────────
+
+// Not exported: a "use server" module may only export async functions. The
+// client infers this shape from the action's signature via useActionState.
+interface CreateApiKeyState {
+  ok: boolean;
+  error?: "forbidden" | "name";
+  /** Plaintext token — returned once, never persisted. */
+  secret?: string;
+  prefix?: string;
+  name?: string;
+}
+
+// useActionState signature: (prevState, formData). Returns the secret ONCE so the
+// client can reveal it; it is never stored in plaintext or put in the URL.
+export async function createApiKey(
+  _prev: CreateApiKeyState,
+  formData: FormData,
+): Promise<CreateApiKeyState> {
+  const user = await requireUser();
+  const siteId = (formData.get("siteId") as string) || "";
+  const slug = (formData.get("slug") as string) || "";
+  const name = ((formData.get("name") as string) || "").trim();
+
+  if (!siteId || !(await canManageSite(siteId, user.id))) {
+    return { ok: false, error: "forbidden" };
+  }
+  if (!name) {
+    return { ok: false, error: "name" };
+  }
+
+  const { secret, prefix, hashedKey } = generateApiKey();
+  await prisma.apiKey.create({
+    data: { siteId, name, prefix, hashedKey, createdById: user.id },
+  });
+
+  if (slug) revalidatePath(`/sites/${slug}/keys`);
+  return { ok: true, secret, prefix, name };
+}
+
+export async function revokeApiKey(formData: FormData) {
+  const user = await requireUser();
+  const keyId = (formData.get("keyId") as string) || "";
+  const siteId = (formData.get("siteId") as string) || "";
+  const slug = (formData.get("slug") as string) || "";
+
+  if (!siteId || !(await canManageSite(siteId, user.id))) {
+    redirect("/sites?error=forbidden");
+  }
+
+  // id + siteId scoping ensures the key belongs to a site the user manages.
+  await prisma.apiKey.updateMany({
+    where: { id: keyId, siteId, revokedAt: null },
+    data: { revokedAt: new Date() },
+  });
+
+  revalidatePath(`/sites/${slug}/keys`);
+  redirect(`/sites/${slug}/keys`);
 }

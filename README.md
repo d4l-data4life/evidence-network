@@ -1,4 +1,4 @@
-# Data4Life Evidence Network (hello-world)
+# Data4Life Evidence Network
 
 A minimal, containerized skeleton for the **Data4Life Evidence Network** — a
 customizable hub for sharing datasets and discovering/joining digital health
