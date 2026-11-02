@@ -260,3 +260,7 @@ docker-compose.yml                db (healthcheck) + migrate + app
 - Sessions are stateless JWTs; the Prisma adapter still persists ORCID
   `User`/`Account` rows for federated logins.
 - To reset everything (including the database volume): `docker compose down -v`.
+
+## License
+
+Licensed under the [Apache License, Version 2.0](LICENSE).
