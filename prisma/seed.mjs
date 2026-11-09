@@ -17,7 +17,7 @@ const ADMIN_USERNAME = "admin";
 const ADMIN_PASSWORD = "password123";
 
 // Resolve the active deployment profile so the seeded branding/i18n settings
-// match the instance identity (e.g. DEPLOYMENT=champs). Mirrors lib/deployment.
+// match the instance identity (e.g. DEPLOYMENT=latam). Mirrors lib/deployment.
 function activeProfile() {
   const url = new URL("../lib/deployment/profiles.json", import.meta.url);
   const profiles = JSON.parse(readFileSync(url, "utf8"));

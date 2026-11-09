@@ -21,7 +21,7 @@
 
 A minimal, containerized skeleton for the **Data4Life Evidence Network** — a
 customizable hub for sharing datasets and discovering/joining digital health
-studies, deployable for regional networks (e.g. Latin America), CHAMPS, the
+studies, deployable for regional networks (e.g. Latin America), the
 Data4Life Data Library node, or the OHDSI Evidence Network working group. It
 proves out the core plumbing the full product will build on:
 
@@ -212,7 +212,7 @@ the lists aren't empty. Data model rationale: [`docs/study-data-model.md`](docs/
 - **Deployment profiles.** Each instance's identity — name, tagline, landing
   intro, accent color, default + offered languages — comes from a **deployment
   profile** selected with the `DEPLOYMENT` env var (`default`, `data-library`,
-  `champs`, `latam`, `ohdsi-wg`; see
+  `latam`, `ohdsi-wg`; see
   [`lib/deployment/profiles.json`](lib/deployment/profiles.json)). The profile
   seeds the branding row on first run; a superuser can override everything at
   runtime in `/admin/branding`. Example:

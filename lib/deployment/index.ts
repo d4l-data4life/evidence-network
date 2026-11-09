@@ -1,13 +1,13 @@
 // Deployment profiles — repo-level presets that give each instance of the
 // Evidence Network its identity (name, tagline, colours, default language, and
 // the set of offered languages). One profile is selected at boot via the
-// `DEPLOYMENT` env var, e.g. `DEPLOYMENT=champs`.
+// `DEPLOYMENT` env var, e.g. `DEPLOYMENT=latam`.
 //
 // A profile only supplies DEFAULTS: the values seeded into the branding
 // singleton on first run (see prisma/seed.mjs) and the fallback used before the
 // DB row exists. A superuser can still override everything at runtime in
 // /admin/branding. This is the layer that makes the app customisable for
-// regional networks (LatAm), CHAMPS, the Data4Life Data Library node, or the
+// regional networks (LatAm), the Data4Life Data Library node, or the
 // OHDSI Evidence Network WG instance without code changes.
 
 import { DEFAULT_LOCALE, asLocales, isLocale, type Locale } from "@/lib/i18n/config";
