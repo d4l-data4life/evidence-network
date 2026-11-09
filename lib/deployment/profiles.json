@@ -17,15 +17,6 @@
     "defaultLocale": "en",
     "enabledLocales": ["en", "es", "pt-BR"]
   },
-  "champs": {
-    "appName": "CHAMPS Evidence Network",
-    "tagline": "Child Health and Mortality Prevention Surveillance",
-    "landingIntro": "Share surveillance datasets and discover collaborative studies across the CHAMPS network.",
-    "accentColor": "#0E7C7B",
-    "logoHeight": 48,
-    "defaultLocale": "en",
-    "enabledLocales": ["en", "pt-BR", "es"]
-  },
   "latam": {
     "appName": "Red de Evidencia LATAM",
     "tagline": "Red de Evidencia en Salud Digital para América Latina",
