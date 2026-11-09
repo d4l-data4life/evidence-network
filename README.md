@@ -1,5 +1,24 @@
 # Data4Life Evidence Network
 
+> [!WARNING]
+> **Experimental proof of concept — not for production use.**
+>
+> This repository is a **proof of concept (PoC)** built to explore ideas and
+> validate technical approaches. It is **unsupported**: there are no releases,
+> no maintenance or security-update commitments, and no guaranteed response to
+> issues or pull requests. APIs, data models, and database schemas may change
+> or be removed at any time without notice or migration path.
+>
+> **Do not deploy it in production, and do not use it with real personal or
+> health data.** The seeded demo accounts use publicly known passwords, and the
+> code has not undergone a security review or any regulatory assessment. The
+> software is provided "as is", without warranty of any kind, as stated in the
+> [Apache License 2.0](LICENSE).
+
+![status: proof of concept](https://img.shields.io/badge/status-proof%20of%20concept-orange)
+![support: none](https://img.shields.io/badge/support-none-lightgrey)
+![production: not ready](https://img.shields.io/badge/production-not%20ready-red)
+
 A minimal, containerized skeleton for the **Data4Life Evidence Network** — a
 customizable hub for sharing datasets and discovering/joining digital health
 studies, deployable for regional networks (e.g. Latin America), CHAMPS, the
@@ -106,7 +125,8 @@ on the login page. You'll be redirected to sandbox.orcid.org, and after
 authorizing, back to the dashboard. ORCID does not share an email address, so
 the account is keyed on the ORCID iD (the OIDC `sub` claim).
 
-For **production**, repeat the registration at
+To use the **ORCID production registry** instead of the sandbox (still for
+evaluation only, see the warning at the top), repeat the registration at
 <https://orcid.org/developer-tools>, set `ORCID_ISSUER=https://orcid.org`, and
 point `AUTH_URL` / the redirect URI at your real https domain.
 
@@ -260,6 +280,12 @@ docker-compose.yml                db (healthcheck) + migrate + app
 - Sessions are stateless JWTs; the Prisma adapter still persists ORCID
   `User`/`Account` rows for federated logins.
 - To reset everything (including the database volume): `docker compose down -v`.
+
+## Project status
+
+This is an experimental **proof of concept**, published as is and **without
+support**. It is **not intended for production use**. See the warning at the
+top of this file.
 
 ## License
 
