@@ -17,22 +17,22 @@
     "defaultLocale": "en",
     "enabledLocales": ["en", "es", "pt-BR"]
   },
-  "latam": {
-    "appName": "Red de Evidencia LATAM",
-    "tagline": "Red de Evidencia en Salud Digital para América Latina",
+  "example-es": {
+    "appName": "Red de Evidencia en Salud Digital",
+    "tagline": "Evidencia federada para la salud digital",
     "landingIntro": "Un espacio para compartir conjuntos de datos y descubrir y unirse a estudios de salud digital.",
     "accentColor": "#C1440E",
     "logoHeight": 48,
     "defaultLocale": "es",
     "enabledLocales": ["es", "pt-BR", "en"]
   },
-  "ohdsi-wg": {
-    "appName": "OHDSI Evidence Network",
-    "tagline": "Observational Health Data Sciences and Informatics",
-    "landingIntro": "The OHDSI Evidence Network Working Group hub for registering datasets and coordinating network studies.",
+  "example-pt-br": {
+    "appName": "Rede de Evidências em Saúde Digital",
+    "tagline": "Evidências federadas para a saúde digital",
+    "landingIntro": "Um espaço para compartilhar conjuntos de dados e descobrir e participar de estudos de saúde digital.",
     "accentColor": "#20425A",
     "logoHeight": 48,
-    "defaultLocale": "en",
-    "enabledLocales": ["en", "es", "pt-BR"]
+    "defaultLocale": "pt-BR",
+    "enabledLocales": ["pt-BR", "es", "en"]
   }
 }

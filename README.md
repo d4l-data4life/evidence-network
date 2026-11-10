@@ -21,8 +21,8 @@
 
 A minimal, containerized skeleton for the **Data4Life Evidence Network** — a
 customizable hub for sharing datasets and discovering/joining digital health
-studies, deployable for regional networks (e.g. Latin America), the
-Data4Life Data Library node, or the OHDSI Evidence Network working group. It
+studies, deployable for different networks (e.g. regional or thematic
+networks, or the Data4Life Data Library node). It
 proves out the core plumbing the full product will build on:
 
 - a **public** landing page (`/`)
@@ -211,14 +211,14 @@ the lists aren't empty. Data model rationale: [`docs/study-data-model.md`](docs/
   languages are **offered** in the switcher at `/admin/branding`.
 - **Deployment profiles.** Each instance's identity — name, tagline, landing
   intro, accent color, default + offered languages — comes from a **deployment
-  profile** selected with the `DEPLOYMENT` env var (`default`, `data-library`,
-  `latam`, `ohdsi-wg`; see
+  profile** selected with the `DEPLOYMENT` env var (`default`, `data-library`, and
+  the language examples `example-es`, `example-pt-br`; see
   [`lib/deployment/profiles.json`](lib/deployment/profiles.json)). The profile
   seeds the branding row on first run; a superuser can override everything at
   runtime in `/admin/branding`. Example:
 
   ```env
-  DEPLOYMENT=latam   # Spanish-first Latin America instance
+  DEPLOYMENT=example-es   # Spanish-first example instance
   ```
 
 - **Message catalogs** live in `messages/<locale>.json` (shared chrome + enum
